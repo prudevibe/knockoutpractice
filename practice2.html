@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<head>
+    <title>My Third Knockout example Array</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <div id="Employee">
+        <p>Push method for array</p>
+        <p>Employee Name:
+            <input data-bind="value: empName"></p>
+        <p><button data-bind=" click: addEmp">Add Emp</button> </p>
+        <p>Employees present:<span data-bind="text:empArray "></span></p>
+        <p><button data-bind="click: popEmp">Pop Emp</button></p>
+
+    </div>
+    <script>
+        function empViewModal() {
+            this.empName = ko.observable(" ");
+            this.empArray = ko.observableArray(['Scott', 'James', 'Jordan', 'Lee', 'RoseMary', 'Kathie']);
+            this.addEmp = function() {
+                if (this.empName != " ") {
+                    this.empArray.push(this.empName());
+                    this.empName("");
+                }
+            }
+            this.popEmp = function() {
+                this.empArray.pop();
+            }
+        }
+        ko.applyBindings(new empViewModal());
+    </script>
+
+</body>
+
+</html>

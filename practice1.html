@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<head>
+    <title>My second Knockout example</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <div id="nameForm">
+        <ti <p>Enter Your name:<input data-bind="value:yourName"></p>
+            <p><strong data-bind="text:yourName"></strong></p>
+    </div>
+    <script>
+        function getYourNameViewModel() {
+            this.yourName = ko.observable("enter your name");
+            alert("!I am not feeling good");
+        }
+        ko.applyBindings(new getYourNameViewModel());
+    </script>
+
+</body>
+
+</html>
