@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<head>
+    <title>KnockoutJS if binding</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <p><strong>Product Details</strong></p>
+    <table border="1">
+        <thead>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Nature</th>
+        </thead>
+        <tbody data-bind="foreach:productArray">
+            <tr>
+                <td><span data-bind="text:productName"></span></td>
+                <td><span data-bind="text:price"></span></td>
+                <td data-bind="if:$data.price >100">Expensive</td>
+                <!-- <td data-bind="ifnot: $data.price <100 ">InExpensive</td> -->
+            </tr>
+
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        function AppViewModel() {
+            self = this;
+            self.productArray = ko.observableArray([{
+                productName: 'Milk',
+                price: 100
+            }, {
+                productName: 'Oil',
+                price: 10
+            }, {
+                productName: 'Petrol',
+                price: 1100
+            }, {
+                productName: 'Maggi',
+                price: 110
+            }]);
+        }
+        var vm = new AppViewModel();
+        ko.applyBindings(vm);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<head>
+    <title>KnockoutJS Visible Binding</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <div data-bind="visible:showMeParaTag">
+        I can see you now !! Kudos...
+
+    </div>
+    <p><button data-bind="click:showPara">Click to see P Tag</button></p>
+    <p><button data-bind="click:hidePara">Click to Hide P Tag</button></p>
+
+    <script>
+        function AppViewModel() {
+            this.showMeParaTag = ko.observable(false); // initially hidden 
+            this.showPara = function() {
+                this.showMeParaTag(true);
+            }
+            this.hidePara = function() {
+                this.showMeParaTag(false);
+            }
+        }
+
+
+        var vm = new AppViewModel();
+        ko.applyBindings(vm);
+        // vm.showMeParaTag(true);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<head>
+    <title>My forEach Knockout example</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <p>List of product details:</p>
+    <div class=pDetails ">
+        <ul data-bind = "foreach:productArray ">
+            <li>
+                <span data-bind = "text:productName "></span>
+                <a href="# " data-bind = "click: $parent.removeProduct ">Remove</a>
+
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    function appViewModel() {
+        self = this;
+        self.productArray = ko.observableArray([{productName: 'Milk'},
+               {productName: 'Oil'},
+               {productName: 'Shampoo'}]);
+        self.removeProduct = function(){
+            self.productArray.remove(this);
+        };
+
+    }
+    var model = new appViewModel();
+    ko.applyBindings(model);
+</script>
+
+</body>
+
+</html>
