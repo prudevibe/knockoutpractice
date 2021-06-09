@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Example one Hello World</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <form data-bind="submit:addItem">
+        Add Item:
+        <input type="text" data-bind='value:itemToAdd , valueUpdate="afterKeyDown"'>
+        <button type="submit" data-bind="enable:itemToAdd().length > 0">Add</button>
+    </form>
+    <select multiple="multiple" height="5" data-bind="options:allItems, selectedOptions:selectedItems"></select>
+    <div>
+        <button data-bind="click:removeSelected, enable:selectedItems().length > 0">Remove</button>
+        <button data-bind="click:sortItems, enable:allItems().length >1">Sort</button>
+    </div>
+
+
+
+    <script type="text/javascript">
+        function appViewModel() {
+            this.itemToAdd = ko.observable("");
+            this.allItems = ko.observableArray(['Alpha', 'Beta', 'gamma']);
+            this.selectedItems = ko.observableArray(['Beta']);
+
+            this.addItem = function() {
+                if (this.itemToAdd() != "" && this.allItems.indexOf(this.itemToAdd()) < 0) {
+                    this.allItems.push(this.itemToAdd());
+                }
+                this.itemToAdd("");
+            };
+            this.removeSelected = function() {
+                this.allItems.removeAll(this.selectedItems());
+                this.selectedItems([]);
+            };
+            this.sortItems = function() {
+                this.allItems.sort();
+            };
+        };
+        var vm = new appViewModel();
+        ko.applyBindings(vm);
+    </script>
+
+</body>
+
+</html>

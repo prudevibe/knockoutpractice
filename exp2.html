@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Example one Hello World</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <p>you have clicked <span data-bind="text:noOfClicks">&nbsp;</span></p>
+    <button data-bind="click:registerClick , disable:hasClickTooManyTimes">Click Me</button>
+    <div data-bind="visible:hasClickTooManyTimes">
+        That's too many clicks! Stop.
+        <button data-bind="click:resetCounter">Reset</button>
+    </div>
+
+    <script type="text/javascript">
+        function appViewModel() {
+            self = this;
+            self.noOfClicks = ko.observable(0);
+            self.registerClick = function() {
+                this.noOfClicks(this.noOfClicks() + 1);
+            };
+            this.resetCounter = function() {
+                this.noOfClicks(0);
+            };
+            this.hasClickTooManyTimes = ko.computed(function() {
+                if (this.noOfClicks() >= 3) {
+                    return true;
+                }
+            }, this);
+        }
+        var vm = new appViewModel();
+        ko.applyBindings(vm);
+    </script>
+
+</body>
+
+</html>

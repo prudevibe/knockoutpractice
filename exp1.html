@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Example one Hello World</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div>
+        <p>First Name:<input data-bind="value:firstName"></p>
+        <p>Last Name: <input data-bind="value:lastName"></p>
+        <h2> Hello, <span data-bind="text:fullName"></span></h2>
+    </div>
+
+    <script type="text/javascript">
+        function hwViewModel() {
+            this.firstName = ko.observable("abhi");
+            this.lastName = ko.observable("shek");
+            this.fullName = ko.computed(function() {
+                return this.firstName() + " " + this.lastName();
+            }, this);
+        }
+        var vm = new hwViewModel();
+        ko.applyBindings(vm);
+    </script>
+
+</body>
+
+</html>

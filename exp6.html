@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Example one Hello World</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <h2>People</h2>
+    <ul data-bind="foreach: people">
+        <li>
+            <div>
+                <span data-bind="text:name"></span> has <span data-bind="text: children().length">&nbsp;</span> children:
+                <a href='#' data-bind="click: addChild">Add child</a>
+                <a href='#' data-bind="click: removeChild">Remove child</a>
+                <span class='renderTime' data-bind='visible: $root.showRenderTimes'>
+                    (person rendered at <span data-bind='text: new Date().getSeconds()' > </span>)
+                </span>
+
+            </div>
+            <ul data-bind="foreach:children">
+                <li>
+                    <span data-bind="text:$data"></span>
+                    <span class='renderTime' data-bind='visible: $root.showRenderTimes'>
+                        (child rendered at <span data-bind='text: new Date().getSeconds()' > </span>)
+                    </span>
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+    <label><input data-bind='checked: showRenderTimes' type='checkbox' /> Show render times</label>
+
+
+
+    <script type="text/javascript">
+        var Person = function(name, children) {
+            this.name = name;
+            this.children = ko.observableArray(children);
+            this.addChild = function() {
+                this.children.push("New child");
+            }.bind(this);
+            this.removeChild = function() {
+                this.children.pop();
+            }
+        }
+        var viewModel = {
+            people: [
+                new Person("Annabelle", ["Arnie", "Anders", "Apple"]),
+                new Person("Bertie", ["Boutros-Boutros", "Brianna", "Barbie", "Bee-bop"]),
+                new Person("Charles", ["Cayenne", "Cleopatra"])
+            ],
+            showRenderTimes: ko.observable(false)
+        }
+        ko.applyBindings(viewModel);
+    </script>
+
+</body>
+
+</html>
